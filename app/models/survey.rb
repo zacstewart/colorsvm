@@ -47,6 +47,8 @@ class Survey < ActiveRecord::Base
   end
 
   def prediction
+    redis = Redis.new
+    File.open(Rails.root + 'tmp/svm_model', 'wb') { |f| f << redis.get('svm_model') }
     model = Model.new('tmp/svm_model')
     prediction = model.predict(self.featureize.values)
     (FAVORITE_COLOR.invert)[prediction.to_i]
