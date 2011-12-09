@@ -21,7 +21,10 @@ class Survey < ActiveRecord::Base
   }
 
   def build_example
-    Resque.enqueue(ExampleJob, self.id)
+    if self.favorite_color.present?
+      self.example.destroy if self.example.present?
+      self.example = Example.create(self.featureize.merge(:favorite_color => self.labelize))
+    end
   end
 
   def featureize
