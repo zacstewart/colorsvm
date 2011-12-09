@@ -1,0 +1,59 @@
+%p#notice= notice
+%h1 Favorite Color Prediction
+%p= @survey.prediction.to_s.capitalize
+
+%h1 Survey Answers
+%p
+  %b Birthday:
+  = @survey.birthday
+%p
+  %b Favorite season:
+  = @survey.favorite_season
+%p
+  %b Hometown:
+  = @survey.hometown
+%p
+  %b Time outdoors:
+  = @survey.time_outdoors
+%p
+  %b Gender:
+  = @survey.gender
+%p
+  %b Preferred pattern:
+  = @survey.preferred_pattern
+%p
+  %b Likes spicy food:
+  = @survey.likes_spicy_food
+%p
+  %b Dominant hand:
+  = @survey.dominant_hand
+%p
+  %b Prefers baths:
+  = @survey.prefers_baths
+%p
+  %b Preferred pet:
+  = @survey.preferred_pet
+%p
+  %b Night or day:
+  = @survey.night_or_day
+
+%h1 Prediction Wrong? Correct it
+= form_for(@survey) do |f|
+  - if @survey.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@survey.errors.count, "error")
+        prohibited this survey from being saved:
+      %ul
+        - @survey.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :favorite_color
+    %br/
+    = f.select :favorite_color, Survey::FAVORITE_COLOR.keys
+  .actions
+    = f.submit
+
+= link_to 'Edit', edit_survey_path(@survey)
+|
+\#{link_to 'Back', surveys_path}

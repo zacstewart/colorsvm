@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  birthday: 2011-11-19
+  favorite_season: MyString
+  hometown: MyString
+  time_outdoors: 1
+  gender: MyString
+  preferred_pattern: 1
+  likes_spicy_food: false
+  dominant_hand: MyString
+  prefers_baths: false
+  preferred_pet: MyString
+  night_or_day: MyString
+
+two:
+  birthday: 2011-11-19
+  favorite_season: MyString
+  hometown: MyString
+  time_outdoors: 1
+  gender: MyString
+  preferred_pattern: 1
+  likes_spicy_food: false
+  dominant_hand: MyString
+  prefers_baths: false
+  preferred_pet: MyString
+  night_or_day: MyString

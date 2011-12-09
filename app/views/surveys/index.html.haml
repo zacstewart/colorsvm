@@ -1,0 +1,35 @@
+%h1 Listing surveys
+%table
+  %tr
+    %th Birthday
+    %th Favorite season
+    %th Hometown
+    %th Time outdoors
+    %th Gender
+    %th Preferred pattern
+    %th Likes spicy food
+    %th Dominant hand
+    %th Prefers baths
+    %th Preferred pet
+    %th Night or day
+    %th
+    %th
+    %th
+  - @surveys.each do |survey|
+    %tr
+      %td= survey.birthday
+      %td= survey.favorite_season
+      %td= survey.hometown
+      %td= survey.time_outdoors
+      %td= survey.gender
+      %td= survey.preferred_pattern
+      %td= survey.likes_spicy_food
+      %td= survey.dominant_hand
+      %td= survey.prefers_baths
+      %td= survey.preferred_pet
+      %td= survey.night_or_day
+      %td= link_to 'Show', survey
+      %td= link_to 'Edit', edit_survey_path(survey)
+      %td= link_to 'Destroy', survey, confirm: 'Are you sure?', method: :delete
+%br/
+= link_to 'New Survey', new_survey_path

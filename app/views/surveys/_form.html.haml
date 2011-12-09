@@ -1,0 +1,55 @@
+= form_for(@survey) do |f|
+  - if @survey.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@survey.errors.count, "error")
+        prohibited this survey from being saved:
+      %ul
+        - @survey.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :birthday
+    %br/
+    = f.date_select :birthday, :start_year => 1950, :end_year => Time.now.year
+  .field
+    = f.label :favorite_season
+    %br/
+    = f.text_field :favorite_season
+  .field
+    = f.label :hometown
+    %br/
+    = f.text_field :hometown
+  .field
+    = f.label :time_outdoors, 'Time outdoors per week'
+    %br/
+    = f.number_field :time_outdoors
+  .field
+    = f.label :gender
+    %br/
+    = f.text_field :gender
+  .field
+    = f.label :preferred_pattern
+    %br/
+    = f.number_field :preferred_pattern
+  .field
+    = f.label :likes_spicy_food
+    %br/
+    = f.check_box :likes_spicy_food
+  .field
+    = f.label :dominant_hand
+    %br/
+    = f.text_field :dominant_hand
+  .field
+    = f.label :prefers_baths
+    %br/
+    = f.check_box :prefers_baths
+  .field
+    = f.label :preferred_pet
+    %br/
+    = f.text_field :preferred_pet
+  .field
+    = f.label :night_or_day
+    %br/
+    = f.text_field :night_or_day
+  .actions
+    = f.submit

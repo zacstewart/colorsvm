@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  birth_year: 1
+  birth_month: 1
+  birth_day: 1
+  birth_dow: 1
+  favorite_season: 1
+  latitude: 1.5
+  miles_from_major_city: 1.5
+  time_outdoors: 1.5
+  gender: 1
+  preferred_pattern: 1
+  likes_spicy_food: 1
+  dominant_hand: 1
+  prefers_baths: 1
+  preferred_pet: 1
+  night_or_day: 1
+
+two:
+  birth_year: 1
+  birth_month: 1
+  birth_day: 1
+  birth_dow: 1
+  favorite_season: 1
+  latitude: 1.5
+  miles_from_major_city: 1.5
+  time_outdoors: 1.5
+  gender: 1
+  preferred_pattern: 1
+  likes_spicy_food: 1
+  dominant_hand: 1
+  prefers_baths: 1
+  preferred_pet: 1
+  night_or_day: 1
