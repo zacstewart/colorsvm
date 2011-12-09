@@ -12,7 +12,6 @@ class TrainingJob
     model = Model.new(problem, parameters)
 
     model.save('tmp/svm_model')
-    redis = Redis.new
-    redis.set('svm_model', IO.read(Rails.root + 'tmp/svm_model'))
+    REDIS.set('svm_model', IO.read(Rails.root + 'tmp/svm_model'))
   end
 end
