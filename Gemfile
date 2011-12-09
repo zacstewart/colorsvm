@@ -6,7 +6,8 @@ gem 'rails', '3.1.2'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'sqlite3', :group => [:development, :test]
+gem 'pg', :group => :production
 gem 'resque'
 gem 'tomz-libsvm-ruby-swig'
 
