@@ -39,8 +39,11 @@ class Survey < ActiveRecord::Base
       prefers_baths:     self.prefers_baths ? 1 : 0,
       preferred_pet:     PREFERRED_PET[self.preferred_pet.to_sym],
       night_or_day:      NIGHT_OR_DAY[self.night_or_day.to_sym],
-      favorite_color:    FAVORITE_COLOR[self.favorite_color.to_sym]
     }
+  end
+
+  def labelize
+    FAVORITE_COLOR[self.favorite_color.to_sym]
   end
 
   def prediction
