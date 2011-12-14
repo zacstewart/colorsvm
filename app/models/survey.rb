@@ -5,8 +5,8 @@ class Survey < ActiveRecord::Base
   after_save :build_example
 
   SEASONS         = {:spring => 0, :summer => 1, :fall => 2, :winter => 3}.freeze
-  GENDER          = {:male => 0, :female => 0}.freeze
-  DOMINANT_HAND   = {:left => 0, :right => 0}.freeze
+  GENDER          = {:male => 0, :female => 1}.freeze
+  DOMINANT_HAND   = {:left => 0, :right => 1}.freeze
   PREFERRED_PET   = {:cat => 0, :dog => 1}.freeze
   NIGHT_OR_DAY    = {:night => 0, :day => 1}.freeze
   FAVORITE_COLOR  = {
