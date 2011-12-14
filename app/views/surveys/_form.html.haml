@@ -7,49 +7,111 @@
       %ul
         - @survey.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :birthday
-    %br/
-    = f.date_select :birthday, :start_year => 1950, :end_year => Time.now.year
-  .field
-    = f.label :favorite_season
-    %br/
-    = f.text_field :favorite_season
-  .field
-    = f.label :hometown
-    %br/
-    = f.text_field :hometown
-  .field
-    = f.label :time_outdoors, 'Time outdoors per week'
-    %br/
-    = f.number_field :time_outdoors
-  .field
-    = f.label :gender
-    %br/
-    = f.text_field :gender
-  .field
-    = f.label :preferred_pattern
-    %br/
-    = f.number_field :preferred_pattern
-  .field
-    = f.label :likes_spicy_food
-    %br/
-    = f.check_box :likes_spicy_food
-  .field
-    = f.label :dominant_hand
-    %br/
-    = f.text_field :dominant_hand
-  .field
-    = f.label :prefers_baths
-    %br/
-    = f.check_box :prefers_baths
-  .field
-    = f.label :preferred_pet
-    %br/
-    = f.text_field :preferred_pet
-  .field
-    = f.label :night_or_day
-    %br/
-    = f.text_field :night_or_day
-  .actions
-    = f.submit
+  %ul#questions
+    %li#birthday.question.clearfix
+      = f.label :birthday
+      .input
+        = f.date_select :birthday,
+          {:start_year => 1950, :end_year => Time.now.year, :include_blank => true, :use_short_month => true},
+          :class => 'mini'
+    %li#favorite_season.question.clearfix
+      = f.label :favorite_season
+      .input
+        = f.select :favorite_season, Survey::SEASONS.map { |s, n| [s.capitalize, n] }
+    %li#hometown.question.clearfix
+      = f.label :hometown
+      .input
+        = f.text_field :hometown
+    %li#time_outdoors.question.clearfix
+      = f.label :time_outdoors, 'Hours spent outdoors per week'
+      .input
+        = f.number_field :time_outdoors
+    %li#gender.question.clearfix
+      = f.label :gender
+      .input
+        %ul.inputs-list
+          %li
+            %label
+              = f.radio_button :gender, 0
+              Male
+          %li
+            %label
+              = f.radio_button :gender, 1
+              Female
+    %li#preferred_pattern.question.clearfix
+      = f.label :preferred_pattern
+      .input
+        %label.image
+          = image_tag 'pattern_1.jpg'
+          = f.radio_button :preferred_pattern, 1
+        %label.image
+          = image_tag 'pattern_2.png'
+          = f.radio_button :preferred_pattern, 2
+        %label.image
+          = image_tag 'pattern_3.jpg'
+          = f.radio_button :preferred_pattern, 3
+        %label.image
+          = image_tag 'pattern_4.jpg'
+          = f.radio_button :preferred_pattern, 4
+    %li#likes_spicy_food.question.clearfix
+      = f.label :likes_spicy_food, 'Do you like spicy food?'
+      .input
+        %ul.inputs-list
+          %li
+            %label
+              = f.radio_button :likes_spicy_food, 0
+              .span No
+          %li
+            %label
+              = f.radio_button :likes_spicy_food, 1
+              .span Yes
+    %li#dominant_hand.question.clearfix
+      = f.label :dominant_hand
+      .input
+        %ul.inputs-list
+          %li
+            %label
+              = f.radio_button :dominant_hand, 'left'
+              Left
+          %li
+            %label
+              = f.radio_button :dominant_hand, 'right'
+              Right
+    %li#prefers_baths.question.clearfix
+      = f.label :prefers_baths, 'Do you prefer showers or baths?'
+      .input
+        %ul.inputs-list
+          %li
+            %label
+              = f.radio_button :prefers_baths, 0
+              Showers
+          %li
+            %label
+              = f.radio_button :prefers_baths, 1
+              Baths
+    %li#preferred_pet.question.clearfix
+      = f.label :preferred_pet
+      .input
+        %ul.inputs-list
+          %li
+            %label
+              = f.radio_button :preferred_pet, 0
+              Cats
+          %li
+            %label
+              = f.radio_button :preferred_pet, 1
+              Dogs
+    %li#night_or_day.question.clearfix
+      = f.label :night_or_day, 'Are you a night or day person?'
+      .input
+        %ul.inputs-list
+          %li
+            %label
+              = f.radio_button :night_or_day, 0
+              Night
+          %li
+            %label
+              = f.radio_button :night_or_day, 1
+              Day
+    .actions
+      = f.submit 'Predict my favorite color!', :class => 'btn primary'

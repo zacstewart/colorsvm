@@ -1,3 +1,33 @@
 // Place all the styles related to the surveys controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html, body {
+  height: 100%;
+}
+
+ul#questions {
+  margin: 0;
+  padding: 0;
+  .question {
+    display: block;
+    margin-bottom: 24px;
+    min-height: 100%;
+    width: 100%;
+    label {
+      display: block;
+      // background: #ffd0d0;
+    }
+    &#birthday {
+      #survey_birthday_2i {
+        width: 82px;
+      }
+    }
+    &#preferred_pattern {
+      label.image {
+        float: left;
+        padding: 5px;
+        width: 225px;
+      }
+    }
+  }
+}
