@@ -2,9 +2,9 @@ require 'svm'
 
 namespace :svm do
   desc "Compute thetas"
-  task :compute => :environment do
-    labels = Example.all.map(&:label)
-    examples = Example.all.map(&:features)
+  task :train => :environment do
+    labels = Example.trainable.map(&:label)
+    examples = Example.trainable.map(&:features)
 
     problem = Problem.new(labels,examples)
     parameters = Parameter.new(:kernel_type => LINEAR, :C => 10)

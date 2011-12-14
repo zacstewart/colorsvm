@@ -2,7 +2,10 @@ require 'svm'
 class Survey < ActiveRecord::Base
   has_one :example
 
+  after_create :generate_unique_id!
   after_save :build_example
+
+  validates_uniqueness_of :unique_id
 
   SEASONS         = {:spring => 0, :summer => 1, :fall => 2, :winter => 3}.freeze
   GENDER          = {:male => 0, :female => 1}.freeze
@@ -21,10 +24,10 @@ class Survey < ActiveRecord::Base
   }
 
   def build_example
-    if self.favorite_color.present?
-      self.example.destroy if self.example.present?
-      self.example = Example.create(self.featureize.merge(:favorite_color => self.labelize))
-    end
+    self.example.destroy if self.example.present?
+    example_hash = self.featureize
+    example_hash.merge!(:favorite_color => self.labelize) if self.favorite_color.present?
+    self.example = Example.create(example_hash)
   end
 
   def featureize
@@ -33,7 +36,7 @@ class Survey < ActiveRecord::Base
       birth_month:       self.birthday.month,
       birth_day:         self.birthday.day,
       birth_dow:         self.birthday.strftime('%w').to_i,
-      favorite_season:   SEASONS[self.favorite_season.to_sym],
+      favorite_season:   SEASONS[self.favorite_season.downcase.to_sym],
       time_outdoors:     self.time_outdoors,
       gender:            GENDER[self.gender.to_sym],
       preferred_pattern: self.preferred_pattern,
@@ -54,5 +57,13 @@ class Survey < ActiveRecord::Base
     model = Model.new('tmp/svm_model')
     prediction = model.predict(self.featureize.values)
     (FAVORITE_COLOR.invert)[prediction.to_i]
+  rescue
+    'Could not produce a prediction. Try training the SVM!'
+  end
+
+  def generate_unique_id!
+    until self.unique_id.present?
+      self.update_attribute('unique_id', rand(36**8).to_s(36)) rescue nil
+    end
   end
 end
