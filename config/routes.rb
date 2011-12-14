@@ -1,5 +1,6 @@
 require 'resque/server'
 FavoriteColors::Application.routes.draw do
-  resources :surveys
+  root :to => 'surveys#new'
+  resources :surveys, :path => ''
   mount Resque::Server.new, :at => "/resque"
 end
