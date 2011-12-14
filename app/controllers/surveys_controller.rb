@@ -13,7 +13,7 @@ class SurveysController < ApplicationController
   # GET /surveys/1
   # GET /surveys/1.json
   def show
-    @survey = Survey.find(params[:id])
+    @survey = Survey.find_by_unique_id(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +34,7 @@ class SurveysController < ApplicationController
 
   # GET /surveys/1/edit
   def edit
-    @survey = Survey.find(params[:id])
+    @survey = Survey.find_by_unique_id(params[:id])
   end
 
   # POST /surveys
@@ -44,7 +44,7 @@ class SurveysController < ApplicationController
 
     respond_to do |format|
       if @survey.save
-        format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
+        format.html { redirect_to survey_path(@survey.unique_id), notice: 'Survey was successfully created.' }
         format.json { render json: @survey, status: :created, location: @survey }
       else
         format.html { render action: "new" }
@@ -56,11 +56,11 @@ class SurveysController < ApplicationController
   # PUT /surveys/1
   # PUT /surveys/1.json
   def update
-    @survey = Survey.find(params[:id])
+    @survey = Survey.find_by_unique_id(params[:id])
 
     respond_to do |format|
       if @survey.update_attributes(params[:survey])
-        format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
+        format.html { redirect_to survey_path(@survey.unique_id), notice: 'Survey was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -72,8 +72,7 @@ class SurveysController < ApplicationController
   # DELETE /surveys/1
   # DELETE /surveys/1.json
   def destroy
-    @survey = Survey.find(params[:id])
-    @survey.destroy
+    @survey = Survey.find_by_unique_id(params[:id])
 
     respond_to do |format|
       format.html { redirect_to surveys_url }

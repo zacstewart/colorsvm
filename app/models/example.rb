@@ -1,6 +1,8 @@
 class Example < ActiveRecord::Base
   belongs_to :survey
 
+  scope :trainable, where('favorite_color IS NOT NULL')
+
   def label
     favorite_color
   end

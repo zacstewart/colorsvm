@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209020724) do
+ActiveRecord::Schema.define(:version => 20111214044232) do
 
   create_table "examples", :force => true do |t|
     t.integer  "birth_year"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20111209020724) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "favorite_color"
+    t.string   "unique_id"
   end
 
 end

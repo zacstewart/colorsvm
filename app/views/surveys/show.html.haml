@@ -38,7 +38,8 @@
   = @survey.night_or_day
 
 %h1 Prediction Wrong? Correct it
-= form_for(@survey) do |f|
+
+= form_for @survey, :url => survey_path(@survey.unique_id) do |f|
   - if @survey.errors.any?
     #error_explanation
       %h2
@@ -47,13 +48,10 @@
       %ul
         - @survey.errors.full_messages.each do |msg|
           %li= msg
-  .field
+  .field.clearfix
     = f.label :favorite_color
-    %br/
-    = f.select :favorite_color, Survey::FAVORITE_COLOR.keys
+    .input
+      = f.select :favorite_color, Survey::FAVORITE_COLOR.keys.map { |c| [c.capitalize, c] }
   .actions
-    = f.submit
-
-= link_to 'Edit', edit_survey_path(@survey)
-|
-\#{link_to 'Back', surveys_path}
+    = f.submit 'Correct', :class => 'btn primary'
+    = link_to 'Edit answers', edit_survey_path(@survey.unique_id), :class => 'btn'

@@ -1,4 +1,6 @@
-= form_for(@survey) do |f|
+- if action_name == 'edit'
+  - opts = {:url => survey_path(@survey.unique_id)}
+= form_for(@survey, opts) do |f|
   - if @survey.errors.any?
     #error_explanation
       %h2
@@ -17,7 +19,7 @@
     %li#favorite_season.question.clearfix
       = f.label :favorite_season
       .input
-        = f.select :favorite_season, Survey::SEASONS.map { |s, n| [s.capitalize, n] }
+        = f.select :favorite_season, Survey::SEASONS.map { |s, n| [s.capitalize, s] }
     %li#hometown.question.clearfix
       = f.label :hometown
       .input
@@ -32,11 +34,11 @@
         %ul.inputs-list
           %li
             %label
-              = f.radio_button :gender, 0
+              = f.radio_button :gender, 'male'
               Male
           %li
             %label
-              = f.radio_button :gender, 1
+              = f.radio_button :gender, 'female'
               Female
     %li#preferred_pattern.question.clearfix
       = f.label :preferred_pattern
@@ -95,11 +97,11 @@
         %ul.inputs-list
           %li
             %label
-              = f.radio_button :preferred_pet, 0
+              = f.radio_button :preferred_pet, 'cat'
               Cats
           %li
             %label
-              = f.radio_button :preferred_pet, 1
+              = f.radio_button :preferred_pet, 'dog'
               Dogs
     %li#night_or_day.question.clearfix
       = f.label :night_or_day, 'Are you a night or day person?'
@@ -107,11 +109,11 @@
         %ul.inputs-list
           %li
             %label
-              = f.radio_button :night_or_day, 0
+              = f.radio_button :night_or_day, 'night'
               Night
           %li
             %label
-              = f.radio_button :night_or_day, 1
+              = f.radio_button :night_or_day, 'day'
               Day
     .actions
       = f.submit 'Predict my favorite color!', :class => 'btn primary'
