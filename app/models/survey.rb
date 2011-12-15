@@ -5,9 +5,9 @@ class Survey < ActiveRecord::Base
   after_create :generate_unique_id!
   after_save :build_example
 
-  validates_presence_of :birthday, :favorite_season, :hometown, :time_outdoors,
+  validates :birthday, :favorite_season, :hometown, :time_outdoors,
     :gender, :preferred_pattern, :likes_spicy_food, :dominant_hand, :prefers_baths,
-    :preferred_pet, :night_or_day, :favorite_color
+    :preferred_pet, :night_or_day, :presence => true
   validates_uniqueness_of :unique_id
 
   SEASONS         = {:spring => 0, :summer => 1, :fall => 2, :winter => 3}.freeze
