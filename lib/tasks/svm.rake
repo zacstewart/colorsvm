@@ -24,6 +24,7 @@ namespace :svm do
     end
 
     mean_error = errors.inject { |sum, er| sum + er }.to_f / errors.size
+    REDIS.set('cv_error', mean_error)
 
     puts "Trained SVM. CV error: #{mean_error}"
 

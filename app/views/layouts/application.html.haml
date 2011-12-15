@@ -15,5 +15,6 @@
         %p
           Take this short survey to see if I can predict your favorite color.
           Last trained #{time_ago_in_words(Time.parse(REDIS.get('last_trained')))} ago.
+          Cross validation error: #{number_to_percentage(100 * REDIS.get('cv_error').to_f)}
     .container
       = yield
