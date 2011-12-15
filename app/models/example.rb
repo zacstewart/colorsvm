@@ -10,7 +10,7 @@ class Example < ActiveRecord::Base
 
   def self.cv_set
     m = all_trainable.length
-    m_cv = (m * 0.33).floor
+    m_cv = (m / 3).floor
     all_trainable[0..m_cv]
   end
 
