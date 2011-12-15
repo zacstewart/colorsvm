@@ -37,7 +37,12 @@
   %b Night or day:
   = @survey.night_or_day
 
-%h1 Prediction Wrong? Correct it
+%h1 Prediction Wrong?
+%p
+  In the highly likely case that the prediction is incorrect,
+  you can either come back to this url later and see if it's getting
+  any smarter or you can correct the algorithm by training it with
+  your actual favorite color.
 
 = form_for @survey, :url => survey_path(@survey.unique_id) do |f|
   - if @survey.errors.any?
@@ -53,5 +58,5 @@
     .input
       = f.select :favorite_color, Survey::FAVORITE_COLOR.keys.map { |c| [c.capitalize, c] }
   .actions
-    = f.submit 'Correct', :class => 'btn primary'
+    = f.submit 'Train it!', :class => 'btn primary'
     = link_to 'Edit answers', edit_survey_path(@survey.unique_id), :class => 'btn'
