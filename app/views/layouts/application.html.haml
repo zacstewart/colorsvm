@@ -12,6 +12,8 @@
     .header
       .inner
         %h1 Favorite Color Support Vector Machine
-        %p Take this short survey to see if I can predict your favorite color.
+        %p
+          Take this short survey to see if I can predict your favorite color.
+          Last trained #{time_ago_in_words(Time.parse(REDIS.get('last_trained')))} ago.
     .container
       = yield
