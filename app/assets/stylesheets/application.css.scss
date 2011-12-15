@@ -14,15 +14,19 @@ html, body {
     background: #2b2b2b;
     color: #fcfcfc;
     font-family: Georgia;
-    height: 96px;
+    padding-bottom: 16px;
     .inner {
       margin: 0 auto;
       width: 800px;
       h1 {
+        color: #404040;
         font-size: 36px;
         font-weight: normal;
         line-height: 96px;
         margin: 0;
+      }
+      p {
+        color: #909090;
       }
     }
   }
