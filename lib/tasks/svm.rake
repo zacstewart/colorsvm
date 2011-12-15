@@ -3,8 +3,10 @@ require 'svm'
 namespace :svm do
   desc "Compute thetas"
   task :train => :environment do
-    labels = Example.trainable.map(&:label)
-    examples = Example.trainable.map(&:features)
+    labels = Example.training_set.map(&:label)
+    examples = Example.training_set.map(&:features)
+    cv_labels = Example.cv_set.map(&:label)
+    cv_examples = Example.cv_set.map(&:features)
 
     puts "Training SVM on #{examples.length} examples..."
 
@@ -17,7 +19,15 @@ namespace :svm do
     REDIS.set('svm_model', model_dump)
     REDIS.set('last_trained', Time.now)
 
-    puts 'Trained SVM. Model output follows ' + '-' * 46
+    errors = cv_examples.each_with_index.map do |cv_example, i|
+      model.predict(cv_example).to_i == cv_labels[i] ? 0 : 1
+    end
+
+    mean_error = errors.inject { |sum, er| sum + er }.to_f / errors.size
+
+    puts "Trained SVM. CV error: #{mean_error}"
+
+    puts 'Model output follows ' + '-' * 59
     puts model_dump
     puts '-' * 80
   end
