@@ -63,11 +63,11 @@
         %ul.inputs-list
           %li
             %label
-              = f.radio_button :likes_spicy_food, 0
+              = f.radio_button :likes_spicy_food, false
               .span No
           %li
             %label
-              = f.radio_button :likes_spicy_food, 1
+              = f.radio_button :likes_spicy_food, true
               .span Yes
     %li#dominant_hand.question.clearfix
       = f.label :dominant_hand
@@ -87,11 +87,11 @@
         %ul.inputs-list
           %li
             %label
-              = f.radio_button :prefers_baths, 0
+              = f.radio_button :prefers_baths, false
               Showers
           %li
             %label
-              = f.radio_button :prefers_baths, 1
+              = f.radio_button :prefers_baths, true
               Baths
     %li#preferred_pet.question.clearfix
       = f.label :preferred_pet
