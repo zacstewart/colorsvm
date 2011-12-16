@@ -1,7 +1,8 @@
 class Example < ActiveRecord::Base
   belongs_to :survey
 
-  scope :trainable, where('favorite_color IS NOT NULL')
+  scope :trainable, where('favorite_color IS NOT NULL').reject{ |s| s.invalid? }
+
   validates :birth_year, :birth_month, :birth_day, :birth_dow,
     :favorite_season, :time_outdoors, :gender, :preferred_pattern,
     :likes_spicy_food, :dominant_hand, :prefers_baths, :preferred_pet,
