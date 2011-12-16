@@ -27,10 +27,12 @@ class Survey < ActiveRecord::Base
   }
 
   def build_example
-    self.example.destroy if self.example.present?
-    example_hash = self.featureize
-    example_hash.merge!(:favorite_color => self.labelize) if self.favorite_color.present?
-    self.example = Example.create(example_hash)
+    if self.valid?
+      self.example.destroy if self.example.present?
+      example_hash = self.featureize
+      example_hash.merge!(:favorite_color => self.labelize) if self.favorite_color.present?
+      self.example = Example.create(example_hash)
+    end
   end
 
   def featureize
